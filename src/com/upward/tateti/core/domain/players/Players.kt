@@ -1,4 +1,4 @@
-package com.upward.tateti.core.domain
+package com.upward.tateti.core.domain.players
 
 interface Players {
     fun add(player: Player)
