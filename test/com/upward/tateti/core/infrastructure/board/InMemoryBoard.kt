@@ -1,10 +1,10 @@
-package com.upward.tateti.core.infrastructure.players
+package com.upward.tateti.core.infrastructure.board
 
 import com.upward.tateti.core.domain.board.Board
 import com.upward.tateti.core.domain.board.Position
 import com.upward.tateti.core.domain.players.Symbol
 
-class InMemoryBoard : Board {
+class InMemoryBoard: Board {
     private val matrix = Array(3) { Array(3) { Symbol.None } }
     private var lastPlayer = Symbol.O
 

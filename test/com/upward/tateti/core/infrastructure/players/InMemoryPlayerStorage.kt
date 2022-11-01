@@ -1,4 +1,4 @@
-package com.upward.tateti.core.infrastructure.board
+package com.upward.tateti.core.infrastructure.players
 
 import com.upward.tateti.core.domain.players.Player
 import com.upward.tateti.core.domain.players.Players

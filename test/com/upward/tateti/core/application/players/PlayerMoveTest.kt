@@ -1,9 +1,10 @@
 package com.upward.tateti.core.application.players
 
+import com.upward.tateti.core.domain.board.GameStatus
 import com.upward.tateti.core.domain.board.Position
 import com.upward.tateti.core.domain.board.PositionFixedError
 import com.upward.tateti.core.domain.players.Symbol
-import com.upward.tateti.core.infrastructure.players.InMemoryBoard
+import com.upward.tateti.core.infrastructure.board.InMemoryBoard
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -30,6 +31,18 @@ class PlayerMoveTest {
         handler.exec(Position(0, 1))
 
         assertThrows<PositionFixedError> { handler.exec(Position(0, 1)) }
+    }
+
+    @Test
+    fun `move should return game status that starts with playing`() {
+        val gameStatus = handler.exec(Position(0, 1))
+
+        assertThat(gameStatus).isEqualTo(GameStatus.Playing)
+    }
+    
+    @Test
+    fun `move should return XWin when player X wins`() {
+        
     }
 
     private val board = InMemoryBoard()

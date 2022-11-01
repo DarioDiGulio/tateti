@@ -1,7 +1,7 @@
 package com.upward.tateti.core.application.players
 
 import com.upward.tateti.core.domain.players.Symbol
-import com.upward.tateti.core.infrastructure.board.InMemoryPlayerStorage
+import com.upward.tateti.core.infrastructure.players.InMemoryPlayerStorage
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
