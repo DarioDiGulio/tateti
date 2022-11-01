@@ -127,5 +127,20 @@ class BoardTest {
         assertThat(board.gameStatus()).isEqualTo(GameStatus.XWin)
     }
 
+    @Test
+    fun `is full should return true when all positions are fixed`() {
+        board.add(Position(0, 0))
+        board.add(Position(0, 1))
+        board.add(Position(1, 0))
+        board.add(Position(1, 1))
+        board.add(Position(2, 0))
+        board.add(Position(2, 1))
+        board.add(Position(0, 2))
+        board.add(Position(1, 2))
+        board.add(Position(2, 2))
+
+        assertThat(board.isFull()).isTrue
+    }
+
     private val board = InMemoryBoard()
 }

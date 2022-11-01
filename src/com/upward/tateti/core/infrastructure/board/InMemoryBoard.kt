@@ -62,6 +62,11 @@ class InMemoryBoard: Board {
         return GameStatus.Playing
     }
 
+    override fun isFull(): Boolean {
+        matrix.forEach { row -> row.forEach { cell -> if (cell == Symbol.None) return false } }
+        return true
+    }
+
     override fun get(position: Position) = matrix[position.x][position.y]
 
     override fun lastPlayer() = lastPlayer

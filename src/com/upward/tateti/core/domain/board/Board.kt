@@ -8,4 +8,5 @@ interface Board {
     fun get(position: Position): Symbol
     fun add(position: Position)
     fun gameStatus(): GameStatus
+    fun isFull(): Boolean
 }
