@@ -16,35 +16,26 @@ class InMemoryBoard: Board {
     }
 
     override fun gameStatus(): GameStatus {
-        var gameStatus = checkFirstRow()
+        var gameStatus = checkRows()
         if (gameStatus == GameStatus.Playing) {
-            gameStatus = checkSecondRow()
-        }
-        if (gameStatus == GameStatus.Playing) {
-            gameStatus = checkThirdRow()
+            gameStatus = checkColumns()
         }
         return gameStatus
     }
 
-    private fun checkFirstRow(): GameStatus {
-        val firstRowFirstColumn = this.get(Position(0, 0))
-        val firstRowSecondColumn = this.get(Position(0, 1))
-        val firstRowThirdColumn = this.get(Position(0, 2))
-        return findWinner(firstRowFirstColumn, firstRowSecondColumn, firstRowThirdColumn)
+    private fun checkColumns(): GameStatus {
+        val cells = mutableListOf<Symbol>()
+        matrix.forEach { row -> cells.add(row[0]) }
+        val (first, second, third) = cells
+        return findWinner(first, second, third)
     }
 
-    private fun checkSecondRow(): GameStatus {
-        val secondRowFirstColumn = this.get(Position(1, 0))
-        val secondRowSecondColumn = this.get(Position(1, 1))
-        val secondRowThirdColumn = this.get(Position(1, 2))
-        return findWinner(secondRowFirstColumn, secondRowSecondColumn, secondRowThirdColumn)
-    }
-
-    private fun checkThirdRow(): GameStatus {
-        val thirdRowFirstColumn = this.get(Position(2, 0))
-        val thirdRowSecondColumn = this.get(Position(2, 1))
-        val thirdRowThirdColumn = this.get(Position(2, 2))
-        return findWinner(thirdRowFirstColumn, thirdRowSecondColumn, thirdRowThirdColumn)
+    private fun checkRows(): GameStatus {
+        matrix.forEach { row ->
+            val gameStatus = findWinner(row[0], row[1], row[2])
+            if (gameStatus != GameStatus.Playing) return gameStatus
+        }
+        return GameStatus.Playing
     }
 
     private fun findWinner(first: Symbol, second: Symbol, third: Symbol): GameStatus {
