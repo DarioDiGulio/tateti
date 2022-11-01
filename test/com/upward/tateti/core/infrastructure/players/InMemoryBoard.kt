@@ -16,4 +16,6 @@ class InMemoryBoard : Board {
     override fun get(position: Position) = matrix[position.x][position.y]
 
     override fun lastPlayer() = lastPlayer
+
+    override fun isFixed(position: Position) = matrix[position.x][position.y] != Symbol.None
 }
