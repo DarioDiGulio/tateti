@@ -6,6 +6,6 @@ interface Board {
     fun lastPlayer(): Symbol
     fun isFixed(position: Position): Boolean
     fun get(position: Position): Symbol
-    fun add(position: Position, symbol: Symbol)
+    fun add(position: Position)
     fun gameStatus(): GameStatus
 }
