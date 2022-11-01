@@ -20,7 +20,17 @@ class InMemoryBoard: Board {
         if (gameStatus == GameStatus.Playing) {
             gameStatus = checkColumns()
         }
+        if (gameStatus == GameStatus.Playing) {
+            gameStatus = checkDiagonals()
+        }
         return gameStatus
+    }
+
+    private fun checkDiagonals(): GameStatus {
+        val first = matrix[0][0]
+        val second = matrix[1][1]
+        val third = matrix[2][2]
+        return findWinner(first, second, third)
     }
 
     private fun checkColumns(): GameStatus {

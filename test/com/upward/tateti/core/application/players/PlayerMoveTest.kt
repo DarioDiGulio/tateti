@@ -6,7 +6,6 @@ import com.upward.tateti.core.domain.board.PositionFixedError
 import com.upward.tateti.core.domain.players.Symbol
 import com.upward.tateti.core.infrastructure.board.InMemoryBoard
 import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -41,7 +40,6 @@ class PlayerMoveTest {
         assertThat(gameStatus).isEqualTo(GameStatus.Playing)
     }
 
-    @Disabled
     @Test
     fun `move should return XWin when player X wins`() {
         val gameStatus = execPlayerXWin()
