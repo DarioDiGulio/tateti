@@ -24,10 +24,11 @@ class InMemoryBoard: Board {
     }
 
     private fun checkColumns(): GameStatus {
-        val cells = mutableListOf<Symbol>()
-        matrix.forEach { row -> cells.add(row[0]) }
-        val (first, second, third) = cells
-        return findWinner(first, second, third)
+        matrix.forEachIndexed { index, _ ->
+            val gameStatus = findWinner(matrix[0][index], matrix[1][index], matrix[2][index])
+            if (gameStatus != GameStatus.Playing) return gameStatus
+        }
+        return GameStatus.Playing
     }
 
     private fun checkRows(): GameStatus {
