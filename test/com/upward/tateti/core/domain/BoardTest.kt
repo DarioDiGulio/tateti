@@ -142,5 +142,20 @@ class BoardTest {
         assertThat(board.isFull()).isTrue
     }
 
+    @Test
+    fun `gameStatus should return Tie on full board without winner`() {
+        board.add(Position(0, 0))
+        board.add(Position(0, 1))
+        board.add(Position(1, 0))
+        board.add(Position(1, 1))
+        board.add(Position(2, 1))
+        board.add(Position(2, 0))
+        board.add(Position(0, 2))
+        board.add(Position(1, 2))
+        board.add(Position(2, 2))
+
+        assertThat(board.gameStatus()).isEqualTo(GameStatus.Tie)
+    }
+
     private val board = InMemoryBoard()
 }

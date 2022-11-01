@@ -23,6 +23,7 @@ class InMemoryBoard: Board {
         if (gameStatus == GameStatus.Playing) {
             gameStatus = checkDiagonals()
         }
+        if (gameStatus == GameStatus.Playing && this.isFull()) return GameStatus.Tie
         return gameStatus
     }
 
