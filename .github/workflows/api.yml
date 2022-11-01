@@ -4,7 +4,7 @@ on:
       - main
       - production
     paths:
-      - api/**/*
+      - core/**/*
       - .github/workflows/api.yml
 
 jobs:
