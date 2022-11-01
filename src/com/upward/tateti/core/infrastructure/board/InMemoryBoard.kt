@@ -16,13 +16,36 @@ class InMemoryBoard: Board {
     }
 
     override fun gameStatus(): GameStatus {
+        var gameStatus = checkFirstRow()
+        if (gameStatus == GameStatus.Playing) {
+            gameStatus = checkSecondRow()
+        }
+        return gameStatus
+    }
+
+    private fun checkFirstRow(): GameStatus {
         val firstRowFirstColumn = this.get(Position(0, 0))
         val firstRowSecondColumn = this.get(Position(0, 1))
         val firstRowThirdColumn = this.get(Position(0, 2))
-        if (firstRowFirstColumn == Symbol.X && firstRowSecondColumn == Symbol.X && firstRowThirdColumn == Symbol.X) {
+        return findWinner(firstRowFirstColumn, firstRowSecondColumn, firstRowThirdColumn)
+    }
+
+    private fun checkSecondRow(): GameStatus {
+        val secondRowFirstColumn = this.get(Position(1, 0))
+        val secondRowSecondColumn = this.get(Position(1, 1))
+        val secondRowThirdColumn = this.get(Position(1, 2))
+        return findWinner(secondRowFirstColumn, secondRowSecondColumn, secondRowThirdColumn)
+    }
+
+    private fun findWinner(
+        secondRowFirstColumn: Symbol,
+        secondRowSecondColumn: Symbol,
+        secondRowThirdColumn: Symbol
+    ): GameStatus {
+        if (secondRowFirstColumn == Symbol.X && secondRowSecondColumn == Symbol.X && secondRowThirdColumn == Symbol.X) {
             return GameStatus.XWin
         }
-        if (firstRowFirstColumn == Symbol.O && firstRowSecondColumn == Symbol.O && firstRowThirdColumn == Symbol.O) {
+        if (secondRowFirstColumn == Symbol.O && secondRowSecondColumn == Symbol.O && secondRowThirdColumn == Symbol.O) {
             return GameStatus.OWin
         }
         return GameStatus.Playing
