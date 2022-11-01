@@ -116,5 +116,16 @@ class BoardTest {
         assertThat(board.gameStatus()).isEqualTo(GameStatus.XWin)
     }
 
+    @Test
+    fun `gameStatus should return Xwins on second diagonal X player full`() {
+        board.add(Position(0, 2))
+        board.add(Position(1, 0))
+        board.add(Position(1, 1))
+        board.add(Position(1, 2))
+        board.add(Position(2, 0))
+
+        assertThat(board.gameStatus()).isEqualTo(GameStatus.XWin)
+    }
+
     private val board = InMemoryBoard()
 }
