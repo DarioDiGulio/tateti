@@ -1,6 +1,7 @@
 package com.upward.tateti.core.infrastructure.board
 
 import com.upward.tateti.core.domain.board.Board
+import com.upward.tateti.core.domain.board.GameStatus
 import com.upward.tateti.core.domain.board.Position
 import com.upward.tateti.core.domain.players.Symbol
 
@@ -11,6 +12,10 @@ class InMemoryBoard: Board {
     override fun add(position: Position, symbol: Symbol) {
         lastPlayer = symbol
         matrix[position.x][position.y] = symbol
+    }
+
+    override fun gameStatus(): GameStatus {
+        return GameStatus.Playing
     }
 
     override fun get(position: Position) = matrix[position.x][position.y]

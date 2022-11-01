@@ -11,7 +11,7 @@ class PlayerMove(private val board: Board) {
         val symbol = nextSymbol()
         if (board.isFixed(position)) throw PositionFixedError()
         this.board.add(position, symbol)
-        return GameStatus.Playing
+        return board.gameStatus()
     }
 
     private fun nextSymbol() = if (board.lastPlayer() == Symbol.X) Symbol.O else Symbol.X

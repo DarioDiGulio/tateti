@@ -7,4 +7,5 @@ interface Board {
     fun isFixed(position: Position): Boolean
     fun get(position: Position): Symbol
     fun add(position: Position, symbol: Symbol)
+    fun gameStatus(): GameStatus
 }
