@@ -5,6 +5,7 @@ import com.upward.tateti.core.domain.players.Symbol
 
 class PlayerMove(private val board: Board) {
     fun exec(x: Int, y: Int) {
-        this.board.add(x, y, Symbol.X)
+        val symbol = if (board.lastPlayer() == Symbol.X) Symbol.O else Symbol.X
+        this.board.add(x, y, symbol)
     }
 }
