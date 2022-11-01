@@ -20,6 +20,9 @@ class InMemoryBoard: Board {
         if (gameStatus == GameStatus.Playing) {
             gameStatus = checkSecondRow()
         }
+        if (gameStatus == GameStatus.Playing) {
+            gameStatus = checkThirdRow()
+        }
         return gameStatus
     }
 
@@ -37,17 +40,16 @@ class InMemoryBoard: Board {
         return findWinner(secondRowFirstColumn, secondRowSecondColumn, secondRowThirdColumn)
     }
 
-    private fun findWinner(
-        secondRowFirstColumn: Symbol,
-        secondRowSecondColumn: Symbol,
-        secondRowThirdColumn: Symbol
-    ): GameStatus {
-        if (secondRowFirstColumn == Symbol.X && secondRowSecondColumn == Symbol.X && secondRowThirdColumn == Symbol.X) {
-            return GameStatus.XWin
-        }
-        if (secondRowFirstColumn == Symbol.O && secondRowSecondColumn == Symbol.O && secondRowThirdColumn == Symbol.O) {
-            return GameStatus.OWin
-        }
+    private fun checkThirdRow(): GameStatus {
+        val thirdRowFirstColumn = this.get(Position(2, 0))
+        val thirdRowSecondColumn = this.get(Position(2, 1))
+        val thirdRowThirdColumn = this.get(Position(2, 2))
+        return findWinner(thirdRowFirstColumn, thirdRowSecondColumn, thirdRowThirdColumn)
+    }
+
+    private fun findWinner(first: Symbol, second: Symbol, third: Symbol): GameStatus {
+        if (first == Symbol.X && second == Symbol.X && third == Symbol.X) return GameStatus.XWin
+        if (first == Symbol.O && second == Symbol.O && third == Symbol.O) return GameStatus.OWin
         return GameStatus.Playing
     }
 

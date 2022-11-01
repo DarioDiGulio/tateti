@@ -84,5 +84,29 @@ class BoardTest {
 
         assertThat(board.gameStatus()).isEqualTo(GameStatus.OWin)
     }
+
+    @Test
+    fun `gameStatus should return Xwins on third row X player full`() {
+        board.add(Position(2, 0))
+        board.add(Position(0, 1))
+        board.add(Position(2, 1))
+        board.add(Position(1, 2))
+        board.add(Position(2, 2))
+
+        assertThat(board.gameStatus()).isEqualTo(GameStatus.XWin)
+    }
+
+    @Test
+    fun `gameStatus should return Owins on third row O player full`() {
+        board.add(Position(0, 1))
+        board.add(Position(2, 0))
+        board.add(Position(0, 2))
+        board.add(Position(2, 1))
+        board.add(Position(1, 2))
+        board.add(Position(2, 2))
+
+        assertThat(board.gameStatus()).isEqualTo(GameStatus.OWin)
+    }
+
     private val board = InMemoryBoard()
 }
