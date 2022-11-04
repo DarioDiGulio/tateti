@@ -51,12 +51,30 @@ class PlayerMoveTest {
     }
 
     @Test
-    fun `when player wins should increment its history`() {
+    fun `when Xplayer wins should increment its history`() {
         createPlayers()
         execXPlayerWin()
 
         val xPlayer = players.getBySymbol(Symbol.X)
         assertThat(xPlayer.history).isEqualTo(1)
+    }
+
+    @Test
+    fun `when Oplayer wins should increment its history`() {
+        createPlayers()
+        execOPlayerWin()
+
+        val xPlayer = players.getBySymbol(Symbol.O)
+        assertThat(xPlayer.history).isEqualTo(1)
+    }
+
+    private fun execOPlayerWin(): GameStatus {
+        handler.exec(Position(0, 1))
+        handler.exec(Position(0, 0))
+        handler.exec(Position(0, 2))
+        handler.exec(Position(1, 1))
+        handler.exec(Position(2, 1))
+        return handler.exec(Position(2, 2))
     }
 
     private val board = InMemoryBoard()

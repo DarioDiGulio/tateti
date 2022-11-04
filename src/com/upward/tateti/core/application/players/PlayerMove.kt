@@ -18,6 +18,8 @@ class PlayerMove(private val board: Board, private val players: Players) {
 
     private fun updateHistory(gameStatus: GameStatus) {
         if (gameStatus == GameStatus.XWin) players.getBySymbol(Symbol.X).win()
-        if (gameStatus == GameStatus.OWin) players.getBySymbol(Symbol.O).win()
+        if (gameStatus == GameStatus.OWin) {
+            players.getBySymbol(Symbol.O).win()
+        }
     }
 }
