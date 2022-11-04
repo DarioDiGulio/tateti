@@ -3,8 +3,10 @@ package com.upward.tateti.core.application.players
 import com.upward.tateti.core.domain.board.GameStatus
 import com.upward.tateti.core.domain.board.Position
 import com.upward.tateti.core.domain.board.PositionFixedError
+import com.upward.tateti.core.domain.players.Player
 import com.upward.tateti.core.domain.players.Symbol
 import com.upward.tateti.core.infrastructure.board.InMemoryBoard
+import com.upward.tateti.core.infrastructure.players.InMemoryPlayerStorage
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -42,19 +44,35 @@ class PlayerMoveTest {
 
     @Test
     fun `move should return XWin when player X wins`() {
-        val gameStatus = execPlayerXWin()
+        createPlayers()
+        val gameStatus = execXPlayerWin()
 
         assertThat(gameStatus).isEqualTo(GameStatus.XWin)
     }
 
-    private val board = InMemoryBoard()
-    private val handler = PlayerMove(board)
+    @Test
+    fun `when player wins should increment its history`() {
+        createPlayers()
+        execXPlayerWin()
 
-    private fun execPlayerXWin(): GameStatus {
+        val xPlayer = players.getBySymbol(Symbol.X)
+        assertThat(xPlayer.history).isEqualTo(1)
+    }
+
+    private val board = InMemoryBoard()
+    private val players = InMemoryPlayerStorage()
+    private val handler = PlayerMove(board, players)
+
+    private fun execXPlayerWin(): GameStatus {
         handler.exec(Position(0, 0))
         handler.exec(Position(0, 1))
         handler.exec(Position(1, 1))
         handler.exec(Position(0, 2))
         return handler.exec(Position(2, 2))
+    }
+
+    private fun createPlayers() {
+        players.add(Player("Alice", Symbol.X))
+        players.add(Player("Bob", Symbol.O))
     }
 }
