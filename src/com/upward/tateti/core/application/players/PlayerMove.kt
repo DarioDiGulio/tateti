@@ -12,7 +12,12 @@ class PlayerMove(private val board: Board, private val players: Players) {
         if (board.isFixed(position)) throw PositionFixedError()
         this.board.add(position)
         val gameStatus = board.gameStatus()
-        if (gameStatus == GameStatus.XWin) players.getBySymbol(Symbol.X).win()
+        updateHistory(gameStatus)
         return gameStatus
+    }
+
+    private fun updateHistory(gameStatus: GameStatus) {
+        if (gameStatus == GameStatus.XWin) players.getBySymbol(Symbol.X).win()
+        if (gameStatus == GameStatus.OWin) players.getBySymbol(Symbol.O).win()
     }
 }
