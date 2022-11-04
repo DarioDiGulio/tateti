@@ -68,6 +68,11 @@ class PlayerMoveTest {
         assertThat(xPlayer.history).isEqualTo(1)
     }
 
+    @Test
+    fun fail() {
+        assert(false)
+    }
+
     private fun execOPlayerWin(): GameStatus {
         handler.exec(Position(0, 1))
         handler.exec(Position(0, 0))
