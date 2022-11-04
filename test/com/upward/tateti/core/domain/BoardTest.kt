@@ -157,5 +157,27 @@ class BoardTest {
         assertThat(board.gameStatus()).isEqualTo(GameStatus.Tie)
     }
 
+    @Test
+    fun `is empty should return false with positions in board`() {
+        board.add(Position(0, 0))
+
+        assertThat(board.isEmpty()).isFalse
+    }
+
+    @Test
+    fun `is empty should return true without positions in board`() {
+        assertThat(board.isEmpty()).isTrue
+    }
+
+    @Test
+    fun `reset should replace all positions with None`() {
+        board.add(Position(1, 2))
+        board.add(Position(2, 2))
+
+        board.reset()
+
+        assertThat(board.isEmpty()).isTrue
+    }
+
     private val board = InMemoryBoard()
 }

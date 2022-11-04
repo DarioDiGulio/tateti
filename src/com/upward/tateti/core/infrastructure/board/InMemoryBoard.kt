@@ -6,7 +6,7 @@ import com.upward.tateti.core.domain.board.Position
 import com.upward.tateti.core.domain.players.Symbol
 
 class InMemoryBoard: Board {
-    private val matrix = Array(3) { Array(3) { Symbol.None } }
+    private var matrix = Array(3) { Array(3) { Symbol.None } }
     private var lastPlayer = Symbol.O
 
     override fun add(position: Position) {
@@ -66,6 +66,17 @@ class InMemoryBoard: Board {
     override fun isFull(): Boolean {
         matrix.forEach { row -> row.forEach { cell -> if (cell == Symbol.None) return false } }
         return true
+    }
+
+    override fun isEmpty(): Boolean {
+        matrix.forEach { row -> row.forEach { cell -> if (cell != Symbol.None) return false } }
+        return true
+    }
+
+    override fun reset() {
+        matrix.forEachIndexed { rowIndex, row -> row.forEachIndexed { cellIndex, _ ->
+            matrix[rowIndex][cellIndex] = Symbol.None
+        } }
     }
 
     override fun get(position: Position) = matrix[position.x][position.y]

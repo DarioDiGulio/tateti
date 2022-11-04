@@ -9,4 +9,6 @@ interface Board {
     fun add(position: Position)
     fun gameStatus(): GameStatus
     fun isFull(): Boolean
+    fun isEmpty(): Boolean
+    fun reset()
 }
